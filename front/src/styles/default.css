@@ -14,20 +14,12 @@
   
   /* Reset font sizes and styles */
   body {
-    height: 100%;
+    overflow: auto;
     background-color: #f8f8f8;
 
     font-size: 17px; /* Set your desired base font size */
     line-height: 1.5; /* Adjust line-height if needed */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* Use a fallback font stack */
-  }
-
-  main {
-    height: 100%;
-  }
-
-  section {
-    height: 100%;
   }
   
   /* Reset lists */

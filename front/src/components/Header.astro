@@ -11,36 +11,25 @@
         align-items: center;
     }
 
-    .header__join {
+    img {
+        width: 5em;
+    }
+
+    .join {
         color: white;
         background-color: black;
 
         padding: 0.4em 0.5em 0.4em 5em;
     }
 
-    header img {
-        width: 5em;
-    }
 </style>
 
 <header>
-    <a href="/">
-        <img
-            src="hogar.svg"
-            alt="home icon"
-        >
-    </a>
+    <a aria-label="Go to home page" href="/"><img src="hogar.svg" alt="home icon"></a>
     <div>
-        <h1>
-            Domain-Driven Designers
-        </h1>
+        <h1>Domain-Driven Designers</h1>
         <p>Where awesome Domain-Driven Designers are made</p>
         <a href="#">Submit</a>
     </div>
-    <a
-        class="header__join"
-        href="/join"
-    >
-        Join
-    </a>
+    <a class="join" aria-label="Go to registration page" href="/join">Join</a>
 </header>

@@ -44,18 +44,10 @@
     }
 </style>
 
-<div
-    role="alert"
-    aria-labelledby="alert message:"
-    class="snack snack--error hide"
->
+<div role="alert" aria-labelledby="alert message:" class="snack snack--error hide">
     An error has ocurred
 </div>
-<div
-    role="status"
-    aria-labelledby="status message:"
-    class="snack snack--success hide"
->
+<div role="status" aria-labelledby="status message:" class="snack snack--success hide">
     Success update
 </div>
 
@@ -101,6 +93,9 @@
 </form>
 
 <script>
+    const homeUrl = 'http://localhost:3000'
+    const usersUrl = 'http://localhost:3000/api/users'
+
     function getFormDataByName(form) {
         const inputList = [ ...form.querySelectorAll('[name]') ]
 
@@ -108,7 +103,7 @@
             .map(({ name, value }) => ({ [name]: value }))
             .reduce((acc, el) => ({ ...acc, ...el }), {})
     }
-    async function submitForm(url, data) {
+    async function submitForm(url: string, data) {
         const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -118,14 +113,14 @@
         return res.json()
     }
 
-    function showSnack(role) {
+    function showSnack(role: 'alert' | 'status') {
         const snack = document.querySelector(`[role="${role}"]`)!
         snack.classList.remove('hide')
 
         const fun = () => {
             snack.classList.add('hide')
             if (role === 'status') {
-                location.href = 'http://localhost:3000'
+                location.href = homeUrl
             }
         }
 
@@ -134,17 +129,16 @@
 
     const form = document.querySelector('form')!
 
-    form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event: SubmitEvent) => {
         event.preventDefault()
 
         const data = getFormDataByName(event.target)
 
         try {
-            const res = await submitForm('http://localhost:3000/api/users', data)
+            const res = await submitForm(usersUrl, data)
 
-            if (res.success) {
-                return showSnack('status')
-            }
+            if (res.success) return showSnack('status')
+            
             showSnack('alert')
             
         } catch (error) {

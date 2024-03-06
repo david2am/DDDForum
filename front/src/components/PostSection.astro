@@ -16,27 +16,18 @@ const postList = [
     section {
         margin: 1em 5em;
     }
-    .btn__inactive {
+    .inactive {
         color: rgb(206, 191, 191);
     }
 </style>
 
 <section>
     <h2>
-        <button aria-label="Show popular posts">
-            Popular
-        </button> | 
-        <button
-            class="btn__inactive"
-            aria-label="Show new posts"
-        >
-            New
-        </button>
+        <button aria-label="Show popular posts">Popular</button> | 
+        <button class="inactive" aria-label="Show new posts">New</button>
     </h2>
 
     <ul>
-        {postList.map(post =>
-            <li><Post {...post} /></li>
-        )}
+        {postList.map(post => <li><Post {...post} /></li> )}
     </ul>
 </section>

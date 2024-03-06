@@ -8,40 +8,28 @@ const { description, number, author, daysAgo, comments } = Astro.props
         padding: 0.8em 0;
     }
 
-    .article__aside {
+    .aside {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 0 1em 0 0.5em;
+        width: 1.5em;
+
+        img {
+            width: 1.5em;
+        }
     }
 
-    .article__aside img {
-        width: 1.5em;
-    }
 </style>
 
 <article>
-    <div class="article__aside">
-        <button>
-            <img
-                src="flecha-pequena-arriba.svg"
-                alt="up arrow"
-            >
-        </button>
+    <div class="aside">
+        <button><img src="flecha-arriba.svg" alt="up arrow"></button>
         {number}
-        <button>
-            <img
-                src="flecha-pequena-abajo.svg"
-                alt="down arrow"
-            >
-        </button>
+        <button><img src="flecha-abajo.svg" alt="down arrow"></button>
     </div>
     <div>
-        <h3>
-            "{description}" [<a href="#">link</a>]
-        </h3>
-        <p>
-            {daysAgo} day{daysAgo > 1 && 's'} ago | by <a href="#">{author}</a> | {comments} comment{comments > 1 && 's'}
-        </p>
+        <h3>"{description}" [<a href="#">link</a>]</h3>
+        <p>{daysAgo} day{daysAgo > 1 && 's'} ago | by <a href="#">{author}</a> | {comments} comment{comments > 1 && 's'}</p>
     </div>
 </article>
