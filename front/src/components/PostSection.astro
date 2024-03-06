@@ -1,0 +1,42 @@
+---
+import Post from './Post.astro'
+
+const postList = [
+	{
+		description: 'Domain services vs Application services',
+		number: 7,
+		author: 'David',
+		daysAgo: 7,
+		comments: 5
+	}
+]
+---
+
+<style>
+    section {
+        margin: 1em 5em;
+    }
+    .btn__inactive {
+        color: rgb(206, 191, 191);
+    }
+</style>
+
+<section>
+    <h2>
+        <button aria-label="Show popular posts">
+            Popular
+        </button> | 
+        <button
+            class="btn__inactive"
+            aria-label="Show new posts"
+        >
+            New
+        </button>
+    </h2>
+
+    <ul>
+        {postList.map(post =>
+            <li><Post {...post} /></li>
+        )}
+    </ul>
+</section>
