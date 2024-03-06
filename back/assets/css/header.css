@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    padding: 1em 4em;
+    gap: 3em;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.header__join {
+    color: white;
+    background-color: black;
+
+    padding: 0.4em 0.5em 0.4em 5em;
+}
+
+header img {
+    width: 5em;
+}

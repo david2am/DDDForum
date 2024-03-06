@@ -1,0 +1,60 @@
+/* Reset margins, paddings, and borders */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box; /* Set default box-sizing for consistent layouts */
+  }
+
+  html {
+    background-color: white;
+    height: 100%;
+    padding: 1.5em;
+  }
+  
+  /* Reset font sizes and styles */
+  body {
+    
+    background-color: #f8f8f8;
+    height: 100%;
+
+    font-size: 17px; /* Set your desired base font size */
+    line-height: 1.5; /* Adjust line-height if needed */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; /* Use a fallback font stack */
+  }
+  
+  /* Reset lists */
+  ul, ol {
+    list-style: none;
+  }
+  
+  /* Reset images */
+  img {
+    display: block; /* Display images as block elements by default */
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  p {
+    font-size: 1.1em;
+  }
+
+  .hide {
+    display: none;
+  }

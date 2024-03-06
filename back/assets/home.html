@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>DDD-forum</title>
+    <link rel="stylesheet" href="./css/defaults.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <style>
+        main {
+            margin: 1em 5em;
+        }
+
+        .mainTitle__btn-inactive {
+            color: rgb(206, 191, 191);
+        }
+
+        article {
+            display: flex;
+            align-items: center;
+            padding: 0.8em 0;
+        }
+
+        .article__aside {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1em 0 0.5em;
+        }
+
+        .article__aside img {
+            width: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">
+            <img
+                src="./icons/hogar.svg"
+                alt="home icon"
+            >
+        </a>
+        <div>
+            <h1>
+                Domain-Driven Designers
+            </h1>
+            <p>Where awesome Domain-Driven Designers are made</p>
+            <a href="#">Submit</a>
+        </div>
+        <a
+            class="header__join"
+            href="/join"
+        >
+            Join
+        </a>
+    </header>
+    <main>
+        <h2>
+            <button
+                aria-label="Show popular posts"
+            >
+                Popular
+            </button> | 
+            <button
+                class="mainTitle__btn-inactive"
+                aria-label="Show new posts"
+            >
+                New
+            </button>
+        </h2>
+        <ul>
+            <li>
+                <article>
+                    <div class="article__aside">
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-arriba.svg"
+                                alt="up arrow"
+                            >
+                        </button>
+                        9
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-abajo.svg"
+                                alt="down arrow"
+                            >
+                        </button>
+                    </div>
+                    <div>
+                        <h3>
+                            "Domain services vs Application services" [<a href="#">link</a>]
+                        </h3>
+                        <p>
+                            7 days ago | by <a href="#">stemlerjs</a> | 5 comments
+                        </p>
+                    </div>
+                </article>
+            </li>
+
+            <li>
+                <article>
+                    <div class="article__aside">
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-arriba.svg"
+                                alt="up arrow"
+                            >
+                        </button>
+                        9
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-abajo.svg"
+                                alt="down arrow"
+                            >
+                        </button>
+                    </div>
+                    <div>
+                        <h3>
+                            "Domain services vs Application services" [<a href="#">link</a>]
+                        </h3>
+                        <p>
+                            7 days ago | by <a href="#">stemlerjs</a> | 5 comments
+                        </p>
+                    </div>
+                </article>
+            </li>
+
+            <li>
+                <article>
+                    <div class="article__aside">
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-arriba.svg"
+                                alt="up arrow"
+                            >
+                        </button>
+                        9
+                        <button>
+                            <img
+                                src="./icons/flecha-pequena-abajo.svg"
+                                alt="down arrow"
+                            >
+                        </button>
+                    </div>
+                    <div>
+                        <h3>
+                            "Domain services vs Application services" [<a href="#">link</a>]
+                        </h3>
+                        <p>
+                            7 days ago | by <a href="#">stemlerjs</a> | 5 comments
+                        </p>
+                    </div>
+                </article>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
