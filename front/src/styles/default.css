@@ -9,11 +9,12 @@
   html {
     background-color: white;
     height: 100%;
-    padding: 1.5em;
   }
   
   /* Reset font sizes and styles */
   body {
+    min-height: calc(100% - 3em);
+    margin: 1.5em;
     overflow: auto;
     background-color: #f8f8f8;
 
