@@ -7,7 +7,7 @@ import { Message } from './models/types'
 const app = new Hono()
 
 // APIs
-app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
+app.use('/api/*', cors())
 app.route('/api/users', users)
 
 // Error handling
