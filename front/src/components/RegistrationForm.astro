@@ -96,12 +96,12 @@
     const homeUrl = 'http://localhost:3000'
     const usersUrl = 'http://localhost:3000/api/users'
 
-    function getFormDataByName(form) {
-        const inputList = [ ...form.querySelectorAll('[name]') ]
-
-        return inputList
-            .map(({ name, value }) => ({ [name]: value }))
-            .reduce((acc, el) => ({ ...acc, ...el }), {})
+    function getFormDataByName(form: any) {
+        return [ ...form.querySelectorAll('[name]') ]
+            .reduce(
+                (acc, { name, value}) => ({ ...acc, ...{ [name]: value } }),
+                {}
+            )
     }
     async function submitForm(url: string, data) {
         const res = await fetch(url, {
@@ -113,18 +113,17 @@
         return res.json()
     }
 
-    function showSnack(role: 'alert' | 'status') {
+    function showSnack(role: 'alert' | 'status', message: string) {
         const snack = document.querySelector(`[role="${role}"]`)!
+        snack.textContent = message
         snack.classList.remove('hide')
 
-        const fun = () => {
+        const cb = () => {
             snack.classList.add('hide')
-            if (role === 'status') {
-                location.href = homeUrl
-            }
+            if (role === 'status') { location.href = homeUrl }
         }
 
-        return setTimeout(fun, 5000) 
+        setTimeout(cb, 5000) 
     }
 
     const form = document.querySelector('form')!
@@ -137,13 +136,13 @@
         try {
             const res = await submitForm(usersUrl, data)
 
-            if (res.success) return showSnack('status')
+            if (res.success) return showSnack('status', 'Successful registration')
             
-            showSnack('alert')
+            showSnack('alert', res.error)
             
         } catch (error) {
             console.error(error)
-            showSnack('alert')
+            showSnack('alert', 'Server connection failed, please try again.')
         }
     })
 </script>

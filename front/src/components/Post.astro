@@ -1,4 +1,11 @@
 ---
+interface Props {
+    description: string;
+    number: number;
+    author: string;
+    daysAgo: number;
+    comments: number;
+}
 const { description, number, author, daysAgo, comments } = Astro.props
 ---
 <style>
