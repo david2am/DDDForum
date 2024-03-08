@@ -1,5 +1,7 @@
 import { Hono } from 'hono'
 
+import { logger } from 'hono/logger'
+import { secureHeaders } from 'hono/secure-headers'
 import { cors } from 'hono/cors'
 import { csrf } from 'hono/csrf'
 
@@ -8,12 +10,18 @@ import { Message } from './models/types'
 
 const app = new Hono()
 
+// logger
+app.use(logger())
+
 // protections
+app.use(secureHeaders())
 app.use('/api/*', csrf({ origin: process.env.FRONT_URL! }))
 app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
 
+
 // apis
 app.route('/api/users', users)
+
 
 // error handling
 app.onError((err, c) => {

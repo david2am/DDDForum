@@ -1,5 +1,12 @@
 ---
-
+interface FormData {
+    email: string;
+    username: string;
+    firstname?: string;
+    lastname?: string;
+    password: string;
+    id: string;
+}
 ---
 <style>
     form {
@@ -98,12 +105,12 @@
 
     function getFormDataByName(form: any) {
         return [ ...form.querySelectorAll('[name]') ]
-            .reduce(
-                (acc, { name, value}) => ({ ...acc, ...{ [name]: value } }),
+            .reduce((acc, { name, value}) => 
+                !value ? acc : { ...acc, ...{ [name]: value } },
                 {}
             )
     }
-    async function submitForm(url: string, data) {
+    async function submitForm(url: string, data: FormData) {
         const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
