@@ -1,16 +1,21 @@
 import { Hono } from 'hono'
+
 import { cors } from 'hono/cors'
+import { csrf } from 'hono/csrf'
 
 import users from './handlers/users'
 import { Message } from './models/types'
 
 const app = new Hono()
 
-// APIs
-app.use('/api/*', cors())
+// protections
+app.use('/api/*', csrf({ origin: process.env.FRONT_URL! }))
+app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
+
+// apis
 app.route('/api/users', users)
 
-// Error handling
+// error handling
 app.onError((err, c) => {
   console.error(`${err}`)
   
