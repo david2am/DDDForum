@@ -1,13 +1,6 @@
 ---
 import Snack from './Snack.astro'
-interface FormData {
-    email: string;
-    username: string;
-    firstname?: string;
-    lastname?: string;
-    password: string;
-    id: string;
-}
+
 ---
 <style>
     form {
@@ -89,14 +82,23 @@ interface FormData {
     const homeUrl = 'http://localhost:4321'
     const usersUrl = 'http://localhost:3000/api/users'
 
-    function getFormDataByName(form: any) {
+    interface UserData {
+        email: string;
+        username: string;
+        firstname?: string;
+        lastname?: string;
+        password: string;
+        id: string;
+    }
+
+    function getFormDataByName(form: any): UserData {
         return [ ...form.querySelectorAll('[name]') ]
             .reduce((acc, { name, value}) => 
                 !value ? acc : { ...acc, ...{ [name]: value } },
                 {}
             )
     }
-    async function submitForm(url: string, data: FormData) {
+    async function sendData(url: string, data: UserData) {
         const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -119,17 +121,18 @@ interface FormData {
         setTimeout(cb, 5000) 
     }
 
-    const form = document.querySelector('form')!
-
-    form.addEventListener('submit', async (event: SubmitEvent) => {
+    const submitForm = async (event: SubmitEvent) => {
         event.preventDefault()
 
         const data = getFormDataByName(event.target)
 
         try {
-            const res = await submitForm(usersUrl, data)
+            const res = await sendData(usersUrl, data)
 
-            if (res.success) return showSnack('status', 'Successful registration')
+            if (res.success) {
+                document.cookie = `username=${data.username}`
+                return showSnack('status', 'Successful registration')
+            }
             
             showSnack('alert', res.error)
             
@@ -137,5 +140,9 @@ interface FormData {
             console.error(error)
             showSnack('alert', 'Server connection failed, please try again.')
         }
-    })
+    }
+
+    const form = document.querySelector('form')!
+
+    form.addEventListener('submit', submitForm)
 </script>
