@@ -120,6 +120,10 @@ import Snack from './Snack.astro'
 
         setTimeout(cb, 5000) 
     }
+    function setCookie(name: string, value: string, expiryDate: Date) {
+        const cookieStr = `${name}=${value}; expires=${expiryDate.toUTCString()}; path=/`
+        document.cookie = cookieStr
+    }
 
     const submitForm = async (event: SubmitEvent) => {
         event.preventDefault()
@@ -130,7 +134,7 @@ import Snack from './Snack.astro'
             const res = await sendData(usersUrl, data)
 
             if (res.success) {
-                document.cookie = `username=${data.username}`
+                setCookie('username', data.username, new Date(Date.now() + 60 * 60 * 1000)) // TODO: set to hours
                 return showSnack('status', 'Successful registration')
             }
             
