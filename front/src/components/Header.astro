@@ -53,7 +53,9 @@
                 </div>`
             )
         } else { 
-            newEl = createElFromString(`<a aria-label="Go to registration page" href="/join">Join</a>`)
+            newEl = createElFromString(`
+                <a aria-label="Go to registration page" href="/join">Join</a>`
+            )
             
             newEl.style.color = 'white'
             newEl.style.padding = '0.4em 0.5em 0.4em 5em'
@@ -61,5 +63,13 @@
         }
 
         logStatus?.replaceWith(newEl!)
+    }
+
+    const logOutBtn = document.querySelector('button')
+
+    if (logOutBtn) {
+        logOutBtn.addEventListener('click', () => {
+            document.cookie = `username=`
+        })
     }
 </script>
