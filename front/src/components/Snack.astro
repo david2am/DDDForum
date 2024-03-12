@@ -1,4 +1,7 @@
 ---
+interface Props {
+    role: 'alert' | 'status'
+}
 const { role } = Astro.props
 ---
 <style>
@@ -70,6 +73,42 @@ const { role } = Astro.props
     }
 </style>
 
+<script>
+    function animateProgressbar(progress: any): void {
+        const duration = 5000 // 5 seconds in milliseconds
+
+        let progressWidth = 0
+        const intervalId = setInterval(() => {
+            if (progressWidth >= 100) {
+                clearInterval(intervalId)
+            } else {
+                progressWidth += 100 / (duration / 10) // Increase progress by 100/500 = 0.2% every 10ms
+                progress.value = progressWidth
+            }
+        }, 10) // Update progress every 10 milliseconds
+    }
+
+    const observer = new MutationObserver((mutationList) => {
+        mutationList.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                const target = mutation.target as Element
+                const display = getComputedStyle(target).getPropertyValue('display')
+
+                if (display !== 'none') animateProgressbar(target.querySelector('progress'))
+            }
+        })
+    })
+
+    const snackList = document.querySelectorAll('div[role]')!
+
+    document.querySelectorAll('div[role]')!.forEach(snack => {
+        observer.observe(snack, {
+            attributes: true,
+            attributeFilter: ['class'],
+        })
+    })
+</script>
+
 <div
     role={role}
     class=`${role} hide`
@@ -80,5 +119,5 @@ const { role } = Astro.props
         {role === 'alert' && <img src="exclamacion.svg" alt="">}
         <slot/>
     </p>
-    <progress class=`${role}-progress` max="100" value="70">
+    <progress class={`${role}-progress`} max="100" value="70">
 </div>

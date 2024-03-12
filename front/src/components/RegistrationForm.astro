@@ -82,7 +82,7 @@ import Snack from './Snack.astro'
     const homeUrl = 'http://localhost:4321'
     const usersUrl = 'http://localhost:3000/api/users'
 
-    interface UserData {
+    type UserData = {
         email: string;
         username: string;
         firstname?: string;
@@ -90,6 +90,7 @@ import Snack from './Snack.astro'
         password: string;
         id: string;
     }
+    type SnackProps = { role: 'alert' | 'status'; message: string; timeOut?: number }
 
     function getFormDataByName(form: any): UserData {
         return [ ...form.querySelectorAll('[name]') ]
@@ -108,7 +109,7 @@ import Snack from './Snack.astro'
         return res.json()
     }
 
-    function showSnack(role: 'alert' | 'status', message: string) {
+    function showSnack({ role, message, timeOut = 5000 }: SnackProps) {
         const snack = document.querySelector(`[role="${role}"]`)!
         snack.querySelector('p')!.textContent = message
         snack.classList.remove('hide')
@@ -118,8 +119,9 @@ import Snack from './Snack.astro'
             if (role === 'status') { location.href = homeUrl }
         }
 
-        setTimeout(cb, 5000) 
+        setTimeout(cb, timeOut) 
     }
+    
     function setCookie(name: string, value: string, expiryDate: Date) {
         const cookieStr = `${name}=${value}; expires=${expiryDate.toUTCString()}; path=/`
         document.cookie = cookieStr
@@ -135,14 +137,14 @@ import Snack from './Snack.astro'
 
             if (res.success) {
                 setCookie('username', data.username, new Date(Date.now() + 60 * 60 * 1000)) // TODO: set to hours
-                return showSnack('status', 'Successful registration')
+                return showSnack({ role: 'status', message: 'Successful registration' })
             }
             
-            showSnack('alert', res.error)
+            showSnack({ role: 'alert', message: res.error })
             
         } catch (error) {
             console.error(error)
-            showSnack('alert', 'Server connection failed, please try again.')
+            showSnack({ role: 'alert', message: 'Server connection failed, please try again.' })
         }
     }
 
