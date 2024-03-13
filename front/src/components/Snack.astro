@@ -92,16 +92,16 @@ const { role } = Astro.props
         mutationList.forEach(mutation => {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                 const target = mutation.target as Element
-                const display = getComputedStyle(target).getPropertyValue('display')
+                const isVisible = getComputedStyle(target).getPropertyValue('display') !== 'none'
 
-                if (display !== 'none') animateProgressbar(target.querySelector('progress'))
+                if (isVisible) animateProgressbar(target.querySelector('progress'))
             }
         })
     })
 
     const snackList = document.querySelectorAll('div[role]')!
 
-    document.querySelectorAll('div[role]')!.forEach(snack => {
+    snackList.forEach(snack => {
         observer.observe(snack, {
             attributes: true,
             attributeFilter: ['class'],
@@ -114,7 +114,6 @@ const { role } = Astro.props
     class=`${role} hide`
     aria-labelledby=`${role} message:`
 >
-    
     <p>
         {role === 'alert' && <img src="exclamacion.svg" alt="">}
         <slot/>

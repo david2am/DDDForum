@@ -108,7 +108,6 @@ import Snack from './Snack.astro'
 
         return res.json()
     }
-
     function showSnack({ role, message, timeOut = 5000 }: SnackProps) {
         const snack = document.querySelector(`[role="${role}"]`)!
         snack.querySelector('p')!.textContent = message
@@ -121,7 +120,6 @@ import Snack from './Snack.astro'
 
         setTimeout(cb, timeOut) 
     }
-    
     function setCookie(name: string, value: string, expiryDate: Date) {
         const cookieStr = `${name}=${value}; expires=${expiryDate.toUTCString()}; path=/`
         document.cookie = cookieStr
@@ -136,7 +134,7 @@ import Snack from './Snack.astro'
             const res = await sendData(usersUrl, data)
 
             if (res.success) {
-                setCookie('username', data.username, new Date(Date.now() + 60 * 60 * 1000)) // TODO: set to hours
+                setCookie('username', data.username, new Date(Date.now() + 60 * 60 * 1000))
                 return showSnack({ role: 'status', message: 'Successful registration' })
             }
             

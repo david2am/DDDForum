@@ -12,16 +12,29 @@
     img {
         width: 5em;
     }
+    .join {
+        color: white;
+        padding: 0.4em 0.5em 0.4em 5em;
+        background-color: black;
+    }
 </style>
 
 <header>
-    <a aria-label="Go to home page" href="/"><img src="hogar.svg" alt="home icon"></a>
+    <a aria-label="Go to home page" href="/">
+        <img src="hogar.svg" alt="home icon">
+    </a>
     <div>
         <h1>Domain-Driven Designers</h1>
         <p>Where awesome Domain-Driven Designers are made</p>
         <a href="#">Submit</a>
     </div>
-    { Astro.url.pathname === '/' && <div id="logStatus"/> }
+    {
+        Astro.url.pathname === '/' && 
+        <a class="join hide" aria-label="Go to registration page" href="/join">
+            Join
+        </a>
+    }
+    
 </header>
 
 <script>
@@ -35,41 +48,34 @@
         }
         return null
     }
+    function clearCookie(name: string): void {
+        document.cookie = `${name}=`
+    }
     function createElFromString(str: string): HTMLElement {
         const parser = new DOMParser()
         return parser.parseFromString(str, 'text/html').body.firstChild! as HTMLElement
     }
-    const logStatus = document.querySelector('#logStatus')
-
-    if (logStatus) {
-        const username = getCookie('username')
-        let newEl
     
-        if (username) {
-            newEl = createElFromString(`
+    const joinLink = document.querySelector('a.join')
+
+    if (joinLink) {
+        const username = getCookie('username')
+    
+        if (!username) {
+            joinLink.classList.remove('hide')
+        } else {
+            const logoutBtn = createElFromString(`
                 <div>
                     <p>${username}</p>
                     <button>Logout</button>
                 </div>`
             )
-        } else { 
-            newEl = createElFromString(`
-                <a aria-label="Go to registration page" href="/join">Join</a>`
-            )
-            
-            newEl.style.color = 'white'
-            newEl.style.padding = '0.4em 0.5em 0.4em 5em'
-            newEl.style.backgroundColor = 'black'
+    
+            joinLink?.replaceWith(logoutBtn!)
         }
-
-        logStatus?.replaceWith(newEl!)
     }
 
-    const logOutBtn = document.querySelector('button')
+    const logoutBtn = document.querySelector('button')
 
-    if (logOutBtn) {
-        logOutBtn.addEventListener('click', () => {
-            document.cookie = `username=`
-        })
-    }
+    logoutBtn && logoutBtn.addEventListener('click', () => clearCookie('username')) // TODO: replace with setCookie and use a short time to expire
 </script>
