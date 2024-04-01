@@ -2,11 +2,11 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "db:local": "turso dev --db-file ./db/local/local.db",
-    "db:migrate": "bunx drizzle-kit generate:sqlite && bun run ./db/migrate.ts",
+    "db:migrate": "drizzle-kit generate:sqlite && bun run ./db/migrate.ts",
     "db:seed": "bun run ./db/seed.ts",
-    "db:push": "bunx drizzle-kit push:sqlite",
-    "db:studio": "bunx drizzle-kit studio",
-    "db:drop": "bunx drizzle-kit drop"
+    "db:push": "drizzle-kit push:sqlite",
+    "db:studio": "drizzle-kit studio",
+    "db:drop": "drizzle-kit drop"
   },
   "dependencies": {
     "@libsql/client": "^0.4.3",
