@@ -5,13 +5,6 @@ import { comments, members, posts, users, votes } from './schema'
     console.log('Seeding DB')
 
     try {
-        await db.delete(members)
-        await db.insert(members).values([
-            {
-                id: 'mem1'
-            }
-        ])
-
         await db.delete(users)
         await db.insert(users).values([
             {
@@ -31,7 +24,14 @@ import { comments, members, posts, users, votes } from './schema'
                 username: 'lucho',
                 email: 'lucho@db.com',
                 password: 'pwd3',
-                memberId: 'mem1'
+            }
+        ])
+
+        await db.delete(members)
+        await db.insert(members).values([
+            {
+                id: 'mem1',
+                userId: 'str1'
             }
         ])
 
