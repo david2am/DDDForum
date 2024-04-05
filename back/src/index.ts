@@ -9,14 +9,16 @@ import users from './handlers/users'
 import { Message } from './models/types'
 
 const app = new Hono()
+const isProdEnv = process.env.NODE_ENV === 'production'
 
 // logger
 app.use(logger())
 
+
 // protections
 app.use(secureHeaders())
-app.use('/api/*', csrf({ origin: process.env.FRONT_URL! }))
-app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
+isProdEnv && app.use('/api/*', csrf({ origin: process.env.FRONT_URL! }))
+isProdEnv && app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
 
 
 // apis

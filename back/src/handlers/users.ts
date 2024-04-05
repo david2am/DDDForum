@@ -24,6 +24,18 @@ const USER_PROPS = {
     lastname: users.lastname
 }
 
+app.get('/test', async (c) => {
+    const data = await db.query.posts.findFirst({
+        with: {
+            author: true
+        }
+    })
+
+    return c.json({
+        data
+    })
+})
+
 
 app.get(
     '/',
