@@ -39,6 +39,7 @@ export const posts = sqliteTable('posts', {
 export const comments = sqliteTable('comments', {
   id:       text('id',   length128).primaryKey(),
   text:     text('text', length128),
+  parentCommentId: text('parent_comment_id'),
 
   postId:   text('post_id').notNull().references(() => posts.id),
   authorId: text('author_id').notNull().references(() => members.id),
@@ -75,7 +76,7 @@ export const postRelations = relations(posts, ({ one, many }) => ({
 
 export const commentRelations = relations(comments, ({ one }) => ({
   parent:   one(comments, {
-    fields:     [comments.id],
+    fields:     [comments.parentCommentId],
     references: [comments.id]
   }),
   post:     one(posts, {

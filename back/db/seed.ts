@@ -59,6 +59,13 @@ import { comments, members, posts, users, votes } from './schema'
                 text: 'wepa!',
                 postId: 'pts1',
                 authorId: 'mem1'
+            },
+            {
+                id: 'val3',
+                text: 'Hola',
+                postId: 'pts1',
+                authorId: 'mem1',
+                parentCommentId: 'val1'
             }
         ])
         

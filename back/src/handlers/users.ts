@@ -32,6 +32,8 @@ app.get('/test', async (c) => {
     })
 
     return c.json({
+        success: true,
+        error: undefined,
         data
     })
 })
