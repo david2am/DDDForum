@@ -6,7 +6,8 @@ import { cors } from 'hono/cors'
 import { csrf } from 'hono/csrf'
 
 import users from './handlers/users'
-import { Message } from './models/types'
+import posts from './handlers/posts'
+import { ErrorMessage } from './models/types'
 
 const app = new Hono()
 const isProdEnv = process.env.NODE_ENV === 'production'
@@ -23,6 +24,7 @@ isProdEnv && app.use('/api/*', cors({ origin: process.env.FRONT_URL! }))
 
 // apis
 app.route('/api/users', users)
+app.route('/api/posts', posts)
 
 
 // error handling
@@ -31,9 +33,8 @@ app.onError((err, c) => {
   
   return c.json({
     success: false,
-    error: 'ServerError',
-    data: undefined
-  } satisfies Message, 500 )
+    error: 'ServerError'
+  } satisfies ErrorMessage, 500 )
 })
 app.notFound((c) => c.text('The resource doesn\'t exist', 404))
 

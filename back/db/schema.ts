@@ -40,6 +40,9 @@ export const comments = sqliteTable('comments', {
   id:       text('id',   length128).primaryKey(),
   text:     text('text', length128),
   parentCommentId: text('parent_comment_id'),
+  createdAt: text('created_at', length128).default(
+    sql`CURRENT_TIMESTAMP`
+  ),
 
   postId:   text('post_id').notNull().references(() => posts.id),
   authorId: text('author_id').notNull().references(() => members.id),
@@ -101,9 +104,5 @@ export const votesRelations = relations(votes, ({ one }) => ({
 }))
 
 
-
-export type InsertUser = typeof users.$inferInsert
 export type SelectUser = typeof users.$inferSelect
-
-export const InsertUserShema = createInsertSchema(users)
-export const SelectUserSchema = createSelectSchema(users)
+export type SelectPost = typeof posts.$inferSelect 

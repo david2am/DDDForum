@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 
 import { EmailSchema, NewUserSchema, UpdateUserSchema } from '../models/schemas'
-import { Message } from '../models/types'
+import { UserMessage } from '../models/types'
 
 import * as v from 'valibot'
 
@@ -52,7 +52,7 @@ app.get(
                 success: false,
                 error: 'EmailNotValid',
                 data: undefined
-            } satisfies Message, 400 )
+            } satisfies UserMessage, 400 )
         }
         return { email: result.output }
     }),
@@ -69,14 +69,14 @@ app.get(
                 success: false,
                 error: 'UserNotFound',
                 data: undefined
-            } satisfies Message, 404 )
+            } satisfies UserMessage, 404 )
         }
 
         return c.json({
             success: true,
             error: undefined,
             data,
-        } satisfies Message, 200 )
+        } satisfies UserMessage, 200 )
     }
 )
 
@@ -92,7 +92,7 @@ app.post(
                 success: false,
                 error: 'ValidationError',
                 data: undefined
-            } satisfies Message, 400 )
+            } satisfies UserMessage, 400 )
         }
         return result.output
     }),
@@ -109,7 +109,7 @@ app.post(
                 success: false,
                 error: 'UsernameAlreadyTaken',
                 data: undefined
-            } satisfies Message, 409 )
+            } satisfies UserMessage, 409 )
         }
 
         const [isEmailTaken] = await db
@@ -122,7 +122,7 @@ app.post(
                 success: false,
                 error: 'EmailAlreadyInUse',
                 data: undefined
-            } satisfies Message, 409 )
+            } satisfies UserMessage, 409 )
         }
 
         await db
@@ -133,7 +133,7 @@ app.post(
             success: true,
             error: undefined,
             data: undefined
-        } satisfies Message)
+        } satisfies UserMessage)
     }
 )
 
@@ -150,7 +150,7 @@ app.patch(
                 success: false,
                 error: 'ValidationError',
                 data: undefined
-            } satisfies Message, 400 )
+            } satisfies UserMessage, 400 )
         }
         return result.output
     }),
@@ -168,7 +168,7 @@ app.patch(
                 success: false,
                 error: 'UserNotFound',
                 data: undefined
-            } satisfies Message, 404 )
+            } satisfies UserMessage, 404 )
         }
 
         if (data.username) {
@@ -182,7 +182,7 @@ app.patch(
                     success: false,
                     error: 'UsernameAlreadyTaken',
                     data: undefined
-                } satisfies Message, 409 )
+                } satisfies UserMessage, 409 )
             }
         }
 
@@ -197,7 +197,7 @@ app.patch(
                     success: false,
                     error: 'EmailAlreadyInUse',
                     data: undefined
-                } satisfies Message, 409 )
+                } satisfies UserMessage, 409 )
             }
         }
 
@@ -216,7 +216,7 @@ app.patch(
             success: true,
             error: undefined,
             data: uptatedUser
-        } satisfies Message, 200 )
+        } satisfies UserMessage, 200 )
 
     }
 )

@@ -1,4 +1,4 @@
-import { SelectUser } from '../../db/schema'
+import { SelectPost, SelectUser } from '../../db/schema'
 
 export type Errors =
   'UsernameAlreadyTaken' |
@@ -9,9 +9,19 @@ export type Errors =
   'IdNotMatch' |
   'UserIdAlreadyExist' |
   'EmailNotValid'
-export type UserMessage = Omit<SelectUser, 'password' | 'createdAt' | 'updatedAt'>
-export type Message = {
+
+export type User = Omit<SelectUser, 'password' | 'createdAt' | 'updatedAt'>
+export type UserMessage = {
   success: boolean,
   error: Errors | undefined  
-  data: UserMessage[] | UserMessage | undefined
+  data: User[] | User | undefined
+}
+
+export type ErrorMessage = Omit<UserMessage, 'data'>
+
+export type Posts = Omit<SelectPost, 'password' | 'createdAt' | 'updatedAt'>
+export type PostMessage = {
+  success: boolean,
+  error: Errors | undefined  
+  data: Posts[] | Posts | undefined
 }
