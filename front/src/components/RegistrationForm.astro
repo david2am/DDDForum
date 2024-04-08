@@ -79,8 +79,8 @@ import Snack from './Snack.astro'
 </form>
 
 <script>
-    const homeUrl = 'http://localhost:4321'
-    const usersUrl = 'http://localhost:3000/api/users'
+    const homeUrl = import.meta.env.PUBLIC_CLIENT_BASE_URL
+    const usersUrl = `${import.meta.env.PUBLIC_BACKEND_BASE_URL}/api/users`
 
     type UserData = {
         email: string;
