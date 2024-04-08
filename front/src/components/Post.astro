@@ -1,12 +1,12 @@
 ---
 interface Props {
     description: string;
-    number: number;
+    votes: number;
     author: string;
     daysAgo: number;
     comments: number;
 }
-const { description, number, author, daysAgo, comments } = Astro.props
+const { description, votes, author, daysAgo, comments } = Astro.props
 ---
 <style>
     article {
@@ -32,7 +32,7 @@ const { description, number, author, daysAgo, comments } = Astro.props
 <article>
     <div class="aside">
         <button><img src="flecha-arriba.svg" alt="up arrow"></button>
-        {number}
+        {votes}
         <button><img src="flecha-abajo.svg" alt="down arrow"></button>
     </div>
     <div>

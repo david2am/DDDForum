@@ -1,15 +1,30 @@
 ---
 import Post from './Post.astro'
+import type { PostResponse } from '../models'
 
-const postList = [
-	{
-		description: 'Domain services vs Application services',
-		number: 7,
-		author: 'David',
-		daysAgo: 7,
-		comments: 5
-	}
-]
+function getDaysBetweenDates(date1: string, date2: string): number {
+  const oneDay = 24 * 60 * 60 * 1000
+  const firstDate = new Date(date1)
+  const secondDate = new Date(date2)
+
+  return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay))
+}
+function mapPosts(data: PostResponse[]) {
+    return data.map((
+        { content, votes, author, comments, createdAt }
+    ) => ({
+        description: content,
+        votes: votes.length,
+        author: author.user.username,
+        comments: comments.length,
+        daysAgo: getDaysBetweenDates(createdAt, new Date().toLocaleDateString())
+    }))
+}
+
+const response = await fetch(`${import.meta.env.PUBLIC_BACKEND_BASE_URL}/api/posts`)
+const { data }: { data: PostResponse[] } = await response.json()
+
+const postList = mapPosts(data)
 ---
 
 <style>
