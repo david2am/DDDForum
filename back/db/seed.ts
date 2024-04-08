@@ -32,6 +32,10 @@ import { comments, members, posts, users, votes } from './schema'
             {
                 id: 'mem1',
                 userId: 'str1'
+            },
+            {
+                id: 'mem2',
+                userId: 'str2'
             }
         ])
 
@@ -43,39 +47,68 @@ import { comments, members, posts, users, votes } from './schema'
                 content: 'example',
                 postsType: 'Text',
                 authorId: 'mem1'
+            },
+            {
+                id: 'pts2',
+                title: 'Nalin News',
+                content: 'This morning a little hot dog was found on the street.',
+                postsType: 'Text',
+                authorId: 'mem2'
+            },
+            {
+                id: 'pts3',
+                title: 'Awesome opens to the public',
+                content: 'Now you can buy whathever you wish',
+                postsType: 'Text',
+                authorId: 'mem1'
             }
         ])
 
         await db.delete(comments)
         await db.insert(comments).values([
             {
-                id: 'val1',
+                id: 'com1',
                 text: 'awesome!',
                 postId: 'pts1',
                 authorId: 'mem1'
             },
             {
-                id: 'val2',
+                id: 'com2',
                 text: 'wepa!',
                 postId: 'pts1',
                 authorId: 'mem1'
             },
             {
-                id: 'val3',
+                id: 'com3',
                 text: 'Hola',
                 postId: 'pts1',
                 authorId: 'mem1',
                 parentCommentId: 'val1'
+            },
+            {
+                id: 'com4',
+                text: 'Hola',
+                postId: 'pts2',
+                authorId: 'mem2'
             }
         ])
         
         await db.delete(votes)
         await db.insert(votes).values([
             {
-                count: 3,
                 voteType: 'Upvote',
                 postId: 'pts1',
                 memberId: 'mem1'
+            },
+            {
+                voteType: 'Upvote',
+                postId: 'pts1',
+                memberId: 'mem1'
+            },
+            {
+                voteType: 'Upvote',
+                postId: 'pts2',
+                memberId: 'mem2'
             }
         ])
         

@@ -1,5 +1,9 @@
 import { Hono } from 'hono'
+import { asc } from 'drizzle-orm'
+
 import { db } from '@db/index'
+import { posts } from '@db/schema'
+
 import { PostMessage } from '@models/types'
 
 const app = new Hono()
@@ -33,7 +37,8 @@ app.get('/', async (c) => {
                     postId: false
                 }
             }
-        }
+        },
+        orderBy: [asc(posts.createdAt)],
     })
 
     return c.json({

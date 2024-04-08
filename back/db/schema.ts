@@ -49,7 +49,7 @@ export const comments = sqliteTable('comments', {
 })
 
 export const votes = sqliteTable('votes', {
-  count:    integer('count',  { mode: 'number' }),
+  id:       integer('id').primaryKey({ autoIncrement: true }),
   voteType: text('vote_type', { enum: ['Upvote', 'Downtime'] }),
 
   postId:   text('post_id').notNull().references(() => posts.id),
