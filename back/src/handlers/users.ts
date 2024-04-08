@@ -1,13 +1,13 @@
 import { Hono } from 'hono'
 import { validator } from 'hono/validator'
 
-import { EmailSchema, NewUserSchema, UpdateUserSchema } from '../models/schemas'
-import { UserMessage } from '../models/types'
+import { EmailSchema, NewUserSchema, UpdateUserSchema } from '@models/schemas'
+import { UserMessage } from '@models/types'
 
 import * as v from 'valibot'
 
-import { db } from '../../db'
-import { users } from '../../db/schema'
+import { db } from '@db/index'
+import { users } from '@db/schema'
 import { eq } from 'drizzle-orm'
 
 

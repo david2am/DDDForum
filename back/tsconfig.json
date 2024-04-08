@@ -2,7 +2,13 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
+    "jsxImportSource":     "hono/jsx",
     "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@handlers/*": ["src/handlers/*"],
+      "@models/*": ["src/models/*"],
+      "@db/*": ["db/*"]
+    }
   }
 }

@@ -5,9 +5,9 @@ import { secureHeaders } from 'hono/secure-headers'
 import { cors } from 'hono/cors'
 import { csrf } from 'hono/csrf'
 
-import users from './handlers/users'
-import posts from './handlers/posts'
-import { ErrorMessage } from './models/types'
+import users from '@handlers/users'
+import posts from '@handlers/posts'
+import { ErrorMessage } from '@models/types'
 
 const app = new Hono()
 const isProdEnv = process.env.NODE_ENV === 'production'

@@ -1,4 +1,4 @@
-import { SelectPost, SelectUser } from '../../db/schema'
+import { SelectPost, SelectUser } from '@db/schema'
 
 export type Errors =
   'UsernameAlreadyTaken' |
