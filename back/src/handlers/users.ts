@@ -7,7 +7,7 @@ import { UserMessage } from '@models/types'
 import * as v from 'valibot'
 
 import { db } from '@db/index'
-import { users } from '@db/schema'
+import { members, users } from '@db/schema'
 import { eq } from 'drizzle-orm'
 
 
@@ -125,9 +125,17 @@ app.post(
             } satisfies UserMessage, 409 )
         }
 
+        const id = crypto.randomUUID()
+
         await db
             .insert(users)
-            .values(data)
+            .values({ id, ...data })
+        await db
+            .insert(members)
+            .values({
+                id: crypto.randomUUID(),
+                userId: id,
+            })
 
         return c.json({
             success: true,
@@ -140,7 +148,6 @@ app.post(
 app.patch(
     '/:id',
     validator('json', (value, c) => {
-        console.log(value) // Fix: validation error
         const result = v.safeParse(UpdateUserSchema, value)
 
         if (!result.success) {

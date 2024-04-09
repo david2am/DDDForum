@@ -5,10 +5,6 @@ export const EmailSchema = v.string([
   v.email()
 ])
 export const NewUserSchema = v.object({
-  id: v.string([
-    v.minLength(1, 'Please enter your id'),
-    v.minLength(3, 'Please enter your '),
-  ]),
   email: EmailSchema,
   username: v.string([
     v.minLength(1, 'Please enter your username'),
