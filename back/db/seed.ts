@@ -109,6 +109,11 @@ import { comments, members, posts, users, votes } from './schema'
                 voteType: 'Upvote',
                 postId: 'pts2',
                 memberId: 'mem2'
+            },
+            {
+                voteType: 'Downtime',
+                postId: 'pts3',
+                memberId: 'mem2'
             }
         ])
         
