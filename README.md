@@ -1,2 +1,2 @@
 # Domain Driven Design (DDD) example
-Building a forum using `Bun`, `Turso`, `MySQL` and `Astro`
+Building a forum app using `Bun`, `Turso`, `MySQL` and `Astro`
